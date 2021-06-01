@@ -10,10 +10,92 @@ Target Server Type    : MYSQL
 Target Server Version : 50716
 File Encoding         : 65001
 
-Date: 2021-05-31 15:11:21
+Date: 2021-06-01 16:18:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for boss_operator
+-- ----------------------------
+DROP TABLE IF EXISTS `boss_operator`;
+CREATE TABLE `boss_operator` (
+  `operator_id` int(11) NOT NULL AUTO_INCREMENT,
+  `operator_name` varchar(128) NOT NULL COMMENT '操作员名称',
+  `password` varchar(256) NOT NULL COMMENT '密码',
+  `mobile` varchar(11) NOT NULL COMMENT '手机',
+  `email` varchar(11) NOT NULL COMMENT '邮箱',
+  `name` varchar(11) NOT NULL COMMENT '真名',
+  `raw_add_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '记录添加时间',
+  `raw_update_time` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '记录更新时间',
+  PRIMARY KEY (`operator_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='操作员';
+
+-- ----------------------------
+-- Records of boss_operator
+-- ----------------------------
+INSERT INTO `boss_operator` VALUES ('1', 'zhangsan', 'abc123', '15523836777', 'abc@123.com', 'zhangsan', '2021-06-01 10:47:37', '2021-06-01 10:47:37');
+
+-- ----------------------------
+-- Table structure for boss_operator_role
+-- ----------------------------
+DROP TABLE IF EXISTS `boss_operator_role`;
+CREATE TABLE `boss_operator_role` (
+  `user_role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL,
+  `role_id` int(11) NOT NULL,
+  PRIMARY KEY (`user_role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of boss_operator_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for boss_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `boss_permission`;
+CREATE TABLE `boss_permission` (
+  `perm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `perm_name` varchar(255) NOT NULL COMMENT '权限名称，显示用',
+  `perm_value` varchar(255) NOT NULL COMMENT '权限值',
+  `perm_attachment` varchar(255) NOT NULL COMMENT '权限附加内容',
+  PRIMARY KEY (`perm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of boss_permission
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for boss_role
+-- ----------------------------
+DROP TABLE IF EXISTS `boss_role`;
+CREATE TABLE `boss_role` (
+  `role_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_name` varchar(255) DEFAULT NULL,
+  `role_value` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`role_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of boss_role
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for boss_role_permission
+-- ----------------------------
+DROP TABLE IF EXISTS `boss_role_permission`;
+CREATE TABLE `boss_role_permission` (
+  `role_perm_id` int(11) NOT NULL AUTO_INCREMENT,
+  `role_id` int(11) NOT NULL,
+  `perm_id` int(11) NOT NULL,
+  PRIMARY KEY (`role_perm_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of boss_role_permission
+-- ----------------------------
 
 -- ----------------------------
 -- Table structure for rkt_chapter
@@ -239,21 +321,3 @@ CREATE TABLE `rkt_user` (
 -- Records of rkt_user
 -- ----------------------------
 INSERT INTO `rkt_user` VALUES ('2', 'zhangsan', 'abc123', 'n', 'n', 'n', 'n', 'n', 'avatar0.31431897544081366', 'n', '2021-04-28 17:41:47', '1', '2021-04-09 17:42:05', '2021-04-09 17:42:18');
-
--- ----------------------------
--- Table structure for user
--- ----------------------------
-DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user` (
-  `user_id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(256) NOT NULL COMMENT '用户名',
-  `password` varchar(256) NOT NULL COMMENT '密码',
-  `status` varchar(128) NOT NULL COMMENT '状态',
-  `reg_time` datetime NOT NULL COMMENT '注册时间',
-  PRIMARY KEY (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
-
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', 'aaaadsfasdfads', 'asdfasdfdsdsfdsf', 'INIT', '2021-03-29 14:29:38');

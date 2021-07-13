@@ -29,7 +29,6 @@ public class ShiroRealm extends AuthorizingRealm {
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
         simpleAuthorizationInfo.setRoles(null);
         simpleAuthorizationInfo.setStringPermissions(Sets.newHashSet("student:add"));
-
         return simpleAuthorizationInfo;
     }
 
